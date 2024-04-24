@@ -1,0 +1,31 @@
+﻿@using LoginApp.Data
+@rendermode InteractiveServer
+@page "/sicknote"
+@inject SickNoteService sickNoteService
+
+<h3>Ziekmelding</h3>
+
+<div>
+    <label>Naam:</label>
+    <input @bind="name" />
+</div>
+<div>
+    <label>Reden:</label>
+    <input @bind="reason" />
+</div>
+<button @onclick="AddSickNote">Melden</button>
+
+@code {
+    private string name;
+    private string reason;
+
+    private void AddSickNote()
+    {
+        if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(reason))
+        {
+            sickNoteService.AddSickNote(name, reason);
+            name = string.Empty;
+            reason = string.Empty;
+        }
+    }
+}

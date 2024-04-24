@@ -1,0 +1,22 @@
+﻿@using LoginApp.Data
+@rendermode InteractiveServer
+@page "/recover"
+@inject SickNoteService sickNoteService
+
+<h3>Betermelding</h3>
+
+@foreach (var note in sickNoteService.GetSickNotes())
+{
+    <div>
+        <p><strong>Naam:</strong> @note.Name</p>
+        <p><strong>Reden:</strong> @note.Reason</p>
+        <button @onclick="() => RemoveSickNote(note.Name)">Beter melden</button>
+    </div>
+}
+
+@code {
+    private void RemoveSickNote(string name)
+    {
+        sickNoteService.RemoveSickNote(name);
+    }
+}
